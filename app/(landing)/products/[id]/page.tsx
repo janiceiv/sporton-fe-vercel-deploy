@@ -1,21 +1,32 @@
 import Image from "next/image";
 import ProductActions from "../../components/product-detail/product-actions";
+import { getProductDetails } from "@/app/services/product.service";
+import { getImageUrl } from "@/app/lib/api";
 
-const ProductDetail=() => {
+
+export type TPageProps = {
+  params: Promise<{id: string}>;
+}
+
+const ProductDetail= async ({params}:TPageProps) => {
+  const {id} = await params;
+
+  const product = await getProductDetails(id);
+
   return(
     <main className="container mx-auto py-40 flex gap-12">
       <div className="bg-primary-light aspect-square min-w-140 flex justify-center items-center">
-        <Image src="/image/products/product-4.png" alt="product 4 image" width={550} height={550} className="aspect-square object-contain w-full"/>
+        <Image src={getImageUrl(product.imageUrl)} alt={product.name} width={550} height={550} className="aspect-square object-contain w-full"/>
       </div>
       <div className="w-full py-7">
         <h1 className="font-bold text-5xl mb-6">
-          SportsOn HyperSoccer v2
+          {product.name}
         </h1>
         <div className=" bg-primary-light rounded-full text-primary w-fit py-2 px-6 mb-5">
-          Football
+          {product.category ? product.category.name : "Uncategorized"}
         </div>
         <p className="leading-loose mb-8">
-          The SportsOn HyperSoccer v2 is engineered for the player who demands precision, power, and unrivaled speed on the pitch. Featuring a striking, two-toned black and white design with deep crimson accents, these cleats don't just perform—they make a statement. Experience the future of football footwear with v2's enhanced fit and cutting-edge traction.
+          {product.description}
         </p>
         <div className="text-primary text-3xl font-semibold mb-12">
           {
@@ -23,10 +34,10 @@ const ProductDetail=() => {
               style: "currency",
               currency: "IDR",
               maximumFractionDigits: 0,
-            }).format(458000)
+            }).format(product.price)
           }
         </div>
-        <ProductActions />
+        <ProductActions product={product} stock = {product.stock} />
       </div>
     </main>
   )

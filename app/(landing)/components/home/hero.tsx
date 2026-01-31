@@ -4,14 +4,14 @@ import Image from "next/image";
 
 const HeroSection = () => {
   return(
-    <section id="hero-section" className="container mx-auto h-screen flex">
-      <div className="relative self-center">
+    <section id="hero-section" className="relative container mx-auto min-h-screen flex items-center pt-50">      
+      <div className="relative self-center"/>
         <Image
           src="/image/img-basketball.svg"
           width={300}
           height={300}
           alt="image sporton"
-          className="grayscale absolute left-0 -top-7"
+          className="grayscale absolute left-0 top-25"
         />
         <div className="relative ml-40 w-full">
           <div className="text-primary italic inline-flex items-center px-3 py-2 rounded-full bg-[#FF5F3F]/[0.11]">Friday Sale, 50%</div>
@@ -26,7 +26,6 @@ const HeroSection = () => {
             <Button variant="ghost">Watch Video <Image src='\image\icon-play-video.svg' alt="icon play video" width={29} height={29}/> </Button>
           </div>
         </div>
-      </div>
       <div>
          <Image
           src="/image/img-hero.png"

@@ -6,6 +6,7 @@ import { useRef , useState } from "react";
 type TFileUploadProps = {
   onFileSelect?: (file:File | null) => void;
 }
+
 const FileUpload = ({onFileSelect}: TFileUploadProps) => {
   const [file,setFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
