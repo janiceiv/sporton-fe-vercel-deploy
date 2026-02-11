@@ -4,7 +4,7 @@ import { FiUploadCloud } from "react-icons/fi";
 
 type TImageUploadPreviewProps = {
   label?: string;
-  value?: string;
+  value?: string | null;
   onChange: (file: File) => void;
   className?: string;
 }
